@@ -1,6 +1,7 @@
 import type { NextAuthOptions, User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { db } from "@/lib/db";
+import { SHA256 } from "crypto-js";
 
 export const options: NextAuthOptions = {
     providers: [
@@ -20,7 +21,7 @@ export const options: NextAuthOptions = {
             },
             async authorize(credentials) {
                 const username = credentials?.username as string;
-                const password = credentials?.password as string;
+                const password = SHA256(credentials?.password as string).toString();
                 const user = await db.user.findUnique({
                     where: {
                         username: username,
@@ -38,8 +39,5 @@ export const options: NextAuthOptions = {
                 }
             },
         })
-    ],
-    pages: {
-        signIn: '/login',
-    }
+    ]
 }
