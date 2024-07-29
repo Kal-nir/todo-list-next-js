@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AuthProvider from "./AuthProvider";
 
 export const metadata: Metadata = {
   title: "To-do List",
@@ -12,7 +13,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
