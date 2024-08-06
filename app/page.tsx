@@ -1,5 +1,5 @@
 'use client';
-import Task from "@/components/task";
+import Task from "@/components/Task";
 import { getUserByString } from "@/lib/user";
 import { User } from "@prisma/client";
 import { SessionProvider, useSession } from "next-auth/react";
